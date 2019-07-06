@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/javascript/game.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+    <title>An RPG Game</title>
+
+</head>
+<body>
+
+<!--Navigation-->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">RPG Game</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+
+<!-- Main container -->
+<main id="gameArea">
+
+<!--Jumbotron-->
+
+<div class="container-fluid jumbotron">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <p class="lead">
+                How to play:<br>
+                Click the <strong>Let's Play!</strong> button to start the game. Pick your character and defeat all the enemies to win!
+            </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 my-auto">
+            <button onclick="gameStart()" id="gameStart" class="btn btn-primary btn-lg">Start</button>
+        </div>
+
+    </div>   
+</div> <!-- end of Jumbotron -->
+
+<!--Main game section-->
+<div class="container-fluid text-center">
+
+        <!--Main game row wrapper-->
+        <div class="row">
+
+            <!-- Character selection area -->
+            <div class="col-md-3 my-auto">
+                <h2>Select Character</h2>
+                <h5 class="text-muted">Your opponent will be chosen by random</h5>
+                
+                <div class="row characterChoices">
+                    <!-- <img class="characterSprites" src="./assets/images/character1.gif">
+                    <img class="characterSprites" src="./assets/images/character2.gif">
+                    <img class="characterSprites" src="./assets/images/character3.gif"> -->
+                </div>
+
+                <div class="row characterChoices">                  
+                    <button class="btn btn-md btn-dark mx-auto" id="character1">Monkey</button>
+                    <button class="btn btn-md btn-dark mx-auto" id="character2">Bear</button>
+                    <button class="btn btn-md btn-dark mx-auto" id="character3">Fox</button>
+                    <ul class="" id="characterDescriptions">
+                        <br>
+                        <li class="text-primary">Use your special attack wisely, you only get one!</li>
+                        <hr>
+                        <br>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        <br>
+                        <li>Quas quam expedita debitis earum sapiente rem.</li>
+                        <br>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                    </ul>
+                </div>
+
+            </div> <!-- end Character selection area -->
+
+            <!-- Play area -->
+            <div class="col-md-9">
+
+                <div class="row"> <!-- Character wrapper-->
+                    <div class="col-6">
+                        <h2 id="playerName">???</h2>
+                        <br>
+                        <img id="playerSprite" src="./assets/images/character3.gif">
+                        <br>
+                        <h5>Your attacks:</h5>
+                        <div class="row mx-auto">
+                            <button class="btn btn-primary btn-primary btn-lg mx-auto"><a id="playerAttack">Attack</a></button>     
+                            <button class="btn btn-primary btn-danger btn-lg mx-auto"><a id="playerSpecialAttack">Special Attack</a></button>     
+                        </div>
+                        <br>                 
+                    </div>
+
+                    <div class="col-6">
+                        <h2 id="enemyName">???</h2>
+                        <br>
+                        <img id="enemySprite" src="./assets/images/character1.gif">
+                        <br>                 
+                    </div>
+
+                </div> <!-- end Character wrapper-->
+
+                <div class="row"> <!-- Stats wrapper-->
+                    <div class="col-6">
+                        <h5>Your HP:</h5>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-warning btn-lg"><a id="playerHP">???</a></button>                    
+                    </div>
+
+                    <div class="col-6">
+                        <h5>Enemy HP:</h5>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                            </div>
+                            </div>
+                        <button class="btn btn-primary btn-warning btn-lg"><a id="enemyHP">???</a></button>                     
+                    </div>
+
+                </div> <!-- end Stats wrapper-->
+
+            </div> <!-- end Play area -->
+
+            </div>
+    </div>
+ 
+</main> <!--End of Main Game Div-->  
+
+    <!--Footer-->
+
+    <footer>
+        <div class="container-fluid bg-dark text-light sticky-bottom padding">
+            <div class="row text-center">
+                <div class="col-12 padding">
+
+                    <h5>&copy; Jonas Hellstrom 2019</h5>
+                </div>          
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

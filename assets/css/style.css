@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Staatliches', cursive;
+    border: 2px solid yellowgreen;
+}
+
+.navbar {
+
+}
+
+.jumbotron {
+    background: url(/assets/images/background.jpg);
+    background-size: cover;
+    background-position: 0% 70%
+}
+
+.jumbotron p {
+    padding: 10px;
+    color: #fff;
+    background: rgba(78, 78, 78, 0.507);
+    border-radius: 7px;
+}
+
+.padding {
+    padding: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.characterSprites {
+    width: 100px;
+    margin: -20px;
+}
+
+#playerSprite, #enemySprite {
+    width: 350px;
+    margin: -10px;
+    padding: 10px;
+}
+
+#playGame {
+    font-family: 'Coustard', serif;
+    font-weight: ;
+}
+
+#characterDescriptions {
+    list-style-type: none;
+}
