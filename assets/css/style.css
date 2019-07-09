@@ -12,10 +12,11 @@
 .jumbotron {
     background: url(/assets/images/background.jpg);
     background-size: cover;
-    background-position: 0% 70%
+    background-position: 0% 70%;
+    height: 100vh;
 }
 
-.jumbotron p {
+#jumbotronText {
     padding: 10px;
     color: #fff;
     background: rgba(78, 78, 78, 0.507);
@@ -32,15 +33,16 @@ footer {
     width: 100%;
 }
 
-.characterSprites {
-    width: 100px;
-    margin: -20px;
+#gamePromptStyle {
+    background-color:#444;
+    color: orange;
 }
 
+
 #playerSprite, #enemySprite {
-    width: 350px;
+    width: 250px;
     margin: -10px;
-    padding: 10px;
+    padding-bottom: 40px;
 }
 
 #playGame {
@@ -48,6 +50,177 @@ footer {
     font-weight: ;
 }
 
-#characterDescriptions {
-    list-style-type: none;
+.playDivision {
+
 }
+
+.hiddenButtons {
+  margin: 20px;
+}
+
+.characterSelectBox {
+  display: flex;
+  flex-direction: column;
+  height: 325px;
+}
+.characterSprites {
+    width: 230px;
+}
+
+.characterButton {
+  width: 100px;
+}
+
+/* Animations */
+
+/* @keyframes actionAnimation {
+    0% {
+        transform: rotate(0deg);
+        size: 100%;
+    }
+    25%{
+        transform: rotate(-20deg);       
+        size: 100%;
+    }
+    50%{
+        transform: rotate(0deg); 
+        width: 200px;
+    }
+    75%{
+        transform: rotate(20deg);   
+        size: 100%;     
+    }
+    100%{
+        transform: rotate(0deg);
+        size: 100%;
+    }
+} */
+
+.textShimmer {
+  overflow: hidden;
+  background: linear-gradient(90deg, #ccc, #000, #ccc);
+  background-size: 85%;
+  animation: animate 6s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+#gameStart {
+    text-transform: uppercase;
+    font-size: 2em;
+    letter-spacing: 2px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #fff, rgb(248, 185, 185), #fff);
+    background-size: 85%;
+    animation: animate 1s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  }
+  
+  @keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+  }
+
+
+.statsWrapper {
+  position: relative;
+  padding: 10px;
+}
+
+.statsWrapper h5 {
+  position: absolute;
+  top: -15px;
+  left: 10%;
+  color: #fff;
+  font-size: 2.3em;
+  text-shadow: 0px -2px 0 #000, 0px 2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000;
+}
+
+#HPtracker{
+  position: absolute;
+  float:right;
+  top: -20px;
+  right: 10%;
+  font-size: 2.3em;
+  color: #fff;
+  text-shadow: 0px -2px 0 #000, 0px 2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000;
+}
+
+
+/* PLAY AREA LAUNCH ANIMATION */
+
+/* #playArea {
+  animation: launchAnimation 10s ease-in 1;
+}
+
+@keyframes launchAnimation {
+  0% {
+    height: 100px;
+  }
+  100% {
+    height: 1000px;
+  }
+} */
+
+/* BUTTON GLOW */
+
+
+
+/* Bouncy letters */
+
+/* JUMP */
+#bouncyLetters {
+    cursor: default;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin: auto;
+    display: block;
+    text-align: center;
+  }
+  
+  #bouncyLetters span {
+    position: relative;
+    top: 10px;
+    -webkit-animation: bounce 0.4s ease infinite alternate;
+    font-size: 80px;
+    color: #fff;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+      0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+      0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  #bouncyLetters span:nth-child(2) {
+    -webkit-animation-delay: 0.1s;
+  }
+  
+  #bouncyLetters span:nth-child(3) {
+    -webkit-animation-delay: 0.2s;
+  }
+  
+  #bouncyLetters span:nth-child(4) {
+    -webkit-animation-delay: 0.3s;
+  }
+  
+  #bouncyLetters span:nth-child(5) {
+    -webkit-animation-delay: 0.4s;
+  }
+  
+  /* ANIMATION */
+  @-webkit-keyframes bounce {
+    100% {
+      top: -20px;
+      text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+        0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc,
+        0 50px 25px rgba(0, 0, 0, 0.2);
+    }
+  }

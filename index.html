@@ -29,7 +29,7 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">Restart</a>
                     </li>
                 </ul>
             </div>
@@ -37,37 +37,48 @@
 </nav>
 
 <!-- Main container -->
-<main id="gameArea">
+<main>
 
 <!--Jumbotron-->
 
-<div class="container-fluid jumbotron">
+<div class="container-fluid jumbotron" id="introJumbotron">
     <div class="row">
 
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="col-12 text-center">
+            <h1>RPG GAME</h1>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" id="jumbotronText">
+            <h3>
+                How to play:
+            </h3>
             <p class="lead">
-                How to play:<br>
                 Click the <strong>Let's Play!</strong> button to start the game. Pick your character and defeat all the enemies to win!
+            </p>
+            <p class="lead">
+                This app supports desktop and tablet.
             </p>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 my-auto">
-            <button onclick="gameStart()" id="gameStart" class="btn btn-primary btn-lg">Start</button>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 my-auto text-center">
+            <button onclick="gameStart()" class="btn btn-danger btn-lg"><a id="gameStart">S T A R T</a></button>
         </div>
 
     </div>   
 </div> <!-- end of Jumbotron -->
 
 <!--Main game section-->
-<div class="container-fluid text-center">
-
-        <!--Main game row wrapper-->
-        <div class="row">
+<div class="container-fluid text-center" id="" style="visibility: hidden">
+        <!--Top row game wrapper-->
+        <div class="row" id="gamePromptStyle">
+            <h1 class="mx-auto" id="gamePrompt"> F I G H T ! </h1>
+        </div>
 
             <!-- Character selection area -->
-            <div class="col-md-3 my-auto">
-                <h2>Select Character</h2>
-                <h5 class="text-muted">Your opponent will be chosen by random</h5>
+            <div class="col-12 my-auto" id="selectionArea" style="visibility: hidden">
+                
+                <h1 class="textShimmer" id="selectionScreenHeader">Select Player</h1>
+                <h3 class="text-muted">Your opponents will be picked randomly</h3>
                 
                 <div class="row characterChoices">
                     <!-- <img class="characterSprites" src="./assets/images/character1.gif">
@@ -75,80 +86,112 @@
                     <img class="characterSprites" src="./assets/images/character3.gif"> -->
                 </div>
 
-                <div class="row characterChoices">                  
-                    <button class="btn btn-md btn-dark mx-auto" id="character1">Monkey</button>
-                    <button class="btn btn-md btn-dark mx-auto" id="character2">Bear</button>
-                    <button class="btn btn-md btn-dark mx-auto" id="character3">Fox</button>
-                    <ul class="" id="characterDescriptions">
-                        <br>
-                        <li class="text-primary">Use your special attack wisely, you only get one!</li>
-                        <hr>
-                        <br>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        <br>
-                        <li>Quas quam expedita debitis earum sapiente rem.</li>
-                        <br>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    </ul>
-                </div>
+                <div class="row">
+
+                    <div class="col-10">
+
+                        <div class="row">
+                        <div class="col-4 characterSelectBox">                  
+                            <img class="characterSprites my-auto" src="./assets/images/Monkey.gif">
+                            <button class="btn btn-lg btn-primary characterButton my-auto mx-auto" id="characterOption0">Monkey</button>
+                        </div>
+
+                        <div class="col-4 characterSelectBox">                  
+                            <img class="characterSprites my-auto" src="./assets/images/Bear.gif">
+                            <button class="btn btn-lg btn-primary characterButton my-auto mx-auto" id="characterOption1">Bear</button>
+                        </div>
+
+                        <div class="col-4 characterSelectBox">                  
+                            <img class="characterSprites my-auto" src="./assets/images/Fox.gif">
+                            <button class="btn btn-lg btn-primary characterButton my-auto mx-auto" id="characterOption2">Fox</button>
+                        </div>
+
+                        </div>
+
+                    </div> <!-- end col-10 -->
+                        <div class="col-2 my-auto">
+                            <button class="btn btn-warning btn-lg mx-auto" id="characterConfirm" style="visibility: hidden"><a>Let's play!</a></button>
+                        </div>
+
+                    </div> <!-- end row wrapper -->
+
+
 
             </div> <!-- end Character selection area -->
 
             <!-- Play area -->
-            <div class="col-md-9">
+            <div class="col-12" id="playArea" style="visibility: hidden">
 
                 <div class="row"> <!-- Character wrapper-->
-                    <div class="col-6">
+                    <div class="col-6 playDivision">
                         <h2 id="playerName">???</h2>
                         <br>
-                        <img id="playerSprite" src="./assets/images/character3.gif">
+                        <img id="playerSprite" src="">
                         <br>
                         <h5>Your attacks:</h5>
                         <div class="row mx-auto">
-                            <button class="btn btn-primary btn-primary btn-lg mx-auto"><a id="playerAttack">Attack</a></button>     
-                            <button class="btn btn-primary btn-danger btn-lg mx-auto"><a id="playerSpecialAttack">Special Attack</a></button>     
+                            <button class="btn btn-primary btn-lg mx-auto" id="playerAction"><a>Attack</a></button>     
+                            <button class="btn btn-danger btn-lg mx-auto"id="playerSpecialAction"><a>Special Attack</a></button>     
                         </div>
                         <br>                 
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 playDivision">
                         <h2 id="enemyName">???</h2>
                         <br>
-                        <img id="enemySprite" src="./assets/images/character1.gif">
+                        <img id="enemySprite" src="">
                         <br>                 
                     </div>
 
                 </div> <!-- end Character wrapper-->
 
-                <div class="row"> <!-- Stats wrapper-->
+                <div class="row statsWrapper"> <!-- Stats wrapper-->
                     <div class="col-6">
-                        <h5>Your HP:</h5>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                            </div>
+                        <h5>HP</h5>
+                        <div class="progress" style="height: 30px; margin:10px;">
+                            <div class="progress-bar bg-primary" id="playerHPratio" style="width:0%;"></div>
                         </div>
-                        <button class="btn btn-primary btn-warning btn-lg"><a id="playerHP">???</a></button>                    
+                        <div id="HPtracker">
+                            <a class="text-light" id="playerHP">???</a>         
+                            <a class="text-light" id="">/</a>    
+                            <a class="text-light" id="playerHPorig">???</a>     
+                        </div>         
                     </div>
 
                     <div class="col-6">
-                        <h5>Enemy HP:</h5>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
-                            </div>
-                            </div>
-                        <button class="btn btn-primary btn-warning btn-lg"><a id="enemyHP">???</a></button>                     
+                        <h5>HP</h5>
+                        <div class="progress" style="height: 30px; margin:10px;">
+                            <div class="progress-bar bg-primary" id="enemyHPratio" style="width:0%;"></div>
+                        </div>
+                        <div id="HPtracker">
+                            <a class="text-light" id="enemyHP">???</a>
+                            <a class="text-light" id="">/</a>    
+                            <a class="text-light" id="enemyHPorig">???</a>   
+                        </div>
                     </div>
 
                 </div> <!-- end Stats wrapper-->
 
+                <div class="row hiddenButtons"> <!-- Hidden button wrapper -->
+                    <button class="btn btn-warning btn-lg mx-auto" style="visibility: hidden;" id="nextLevelBtn"><a>On to next level</a></button>
+                    <button class="btn btn-warning btn-lg mx-auto" style="visibility: hidden;" id="finalLevelBtn"><a>On the final level</a></button>
+                </div>
+
             </div> <!-- end Play area -->
 
-            </div>
-    </div>
  
 </main> <!--End of Main Game Div-->  
+
+<!-- <div class="row">
+    <div class="winWrapper">
+        <h1 id="bouncyLetters">
+            <span>W</span>
+            <span>I</span>
+            <span>N</span>
+            <span>!</span>
+        </h1>
+    </div>
+</div> -->
 
     <!--Footer-->
 
@@ -157,7 +200,7 @@
             <div class="row text-center">
                 <div class="col-12 padding">
 
-                    <h5>&copy; Jonas Hellstrom 2019</h5>
+                    <h5 id="jhCopy">&copy; Jonas Hellstrom 2019</h5>
                 </div>          
             </div>
         </div>
