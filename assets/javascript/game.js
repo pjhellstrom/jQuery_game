@@ -73,12 +73,12 @@ function getCharacterSelection() {
             // Based on player selection - randomly generate opponent
             enemySelect();
             // Button color change on selection
-                $("#characterOption0").removeClass("btn-primary");        
-                $("#characterOption1").removeClass("btn-success");
-                $("#characterOption1").addClass("btn-primary");             
-                $("#characterOption2").removeClass("btn-success");
-                $("#characterOption2").addClass("btn-primary");      
-                $("#characterOption0").addClass("btn-success"); 
+                $("#characterOption0").removeClass("btn-outline-primary");        
+                $("#characterOption1").removeClass("btn-primary");
+                $("#characterOption1").addClass("btn-outline-primary");             
+                $("#characterOption2").removeClass("btn-primary");
+                $("#characterOption2").addClass("btn-outline-primary");      
+                $("#characterOption0").addClass("btn-primary"); 
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
             unhidecharacterConfirmbtn();
@@ -93,14 +93,15 @@ function getCharacterSelection() {
             // Based on player selection - randomly generate opponent
             enemySelect();
             // Button color change on selection
-                $("#characterOption1").removeClass("btn-primary");        
-                $("#characterOption0").removeClass("btn-success");
-                $("#characterOption0").addClass("btn-primary");             
-                $("#characterOption2").removeClass("btn-success");
-                $("#characterOption2").addClass("btn-primary");      
-                $("#characterOption1").addClass("btn-success"); 
+                $("#characterOption1").removeClass("btn-outline-primary");        
+                $("#characterOption0").removeClass("btn-primary");
+                $("#characterOption0").addClass("btn-outline-primary");             
+                $("#characterOption2").removeClass("btn-primary");
+                $("#characterOption2").addClass("btn-outline-primary");      
+                $("#characterOption1").addClass("btn-primary"); 
             //Update selection screen header
-            $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!")
+            $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
+            $("#selectionScreenHeader").addClass("selectionConfirm");
             unhidecharacterConfirmbtn();        
         });
     });
@@ -113,12 +114,12 @@ function getCharacterSelection() {
             // Based on player selection - randomly generate opponent
             enemySelect();
             // Button color change on selection
-                $("#characterOption2").removeClass("btn-primary");        
-                $("#characterOption0").removeClass("btn-success");
-                $("#characterOption0").addClass("btn-primary");             
-                $("#characterOption1").removeClass("btn-success");
-                $("#characterOption1").addClass("btn-primary");      
-                $("#characterOption2").addClass("btn-success"); 
+                $("#characterOption2").removeClass("btn-outline-primary");        
+                $("#characterOption0").removeClass("btn-primary");
+                $("#characterOption0").addClass("btn-outline-primary");             
+                $("#characterOption1").removeClass("btn-primary");
+                $("#characterOption1").addClass("btn-outline-primary");      
+                $("#characterOption2").addClass("btn-primary"); 
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!")
             unhidecharacterConfirmbtn();            
@@ -226,7 +227,7 @@ function enemySelectFinal() {
     return;
 }//end enemySelect2
 
-// PLAYER ATTACK FUNCTION ---------------------------------------------------------
+// PLAYER ATTACK FUNCTION -----------------------------------------------------------
 $(document).ready(function() {
     $("#playerAction").click(
         // Player attack (reduces enemy HP by attack-stats of character and updates enemy HP in DOM)
@@ -245,11 +246,15 @@ $(document).ready(function() {
                 }); 
                 }//end if
 
-                // Update enemy HP stats, game prompt
+                // Update enemy HP stats, game prompt, show HP animation
                 $(document).ready(function() {
                     $("#gamePrompt").text("You attacked " + playerEnemy.name + " with " + playerAttack + " damage!");        
                     $("#enemyHP").text(enemyHP);
                     $("#enemyHPratio").css({"width": enemyHPratio*100+"%"});
+                    $("#hpDisplayEnemy").text("-" + playerAttack + "HP");
+                    $("#hpDisplayEnemy").addClass("hpAnimation");
+                    setTimeout(function() {                        
+                        $("#hpDisplayEnemy").removeClass("hpAnimation")}, 1200);
                 });
                 // Slight pause then go to enemy attack function
                 setTimeout(enemyAction, 3000);
@@ -268,20 +273,77 @@ $(document).ready(function() {
                     nextLevelStart();
                     showNextLevelBtn();
                 }
+                // Else, move on to final level
                 else {
                     finalLevelStart();
                     showFinalLevelBtn();
                 }
-                // Else, move on to final level
-
             }//end outer else if
 
         }// end action()
     )// end action jQuery
 });// end document ready function
 
+// PLAYER SPECIAL ATTACK FUNCTION -----------------------------------------------------
+$(document).ready(function() {
+    $("#playerSpecialAction").click(
 
-// ENEMY ATTACK FUNCTION ----------------------------------------------------------
+        // Player special attack (reduces enemy HP by special attack-stats of character and updates enemy HP in DOM, then disables special attack button)
+        function specialAction() {
+            removeSpecialAction(); 
+            enemyHP = enemyHP - playerSpecialAttack;
+            enemyHPratio =  enemyHP / enemyHPorig;
+            
+            // If to check if enemy has not yet been defeater, enemyHP > 0
+             if (enemyHP > 0) {            
+                // Set HP bar to red if under 30% HP
+                if (enemyHPratio < 0.3) {
+                    $(document).ready(function() {
+                        $("#enemyHPratio").removeClass("bg-primary");        
+                        $("#enemyHPratio").addClass("bg-danger"); 
+                }); 
+                }//end if
+
+                //Update enemy HP stats, game prompt
+                $(document).ready(function() {
+                    $("#gamePrompt").text("You used the special attack on " + playerEnemy.name + " and dealt " + playerSpecialAttack + " damage!"); 
+                    $("#enemyHP").text(enemyHP);
+                    $("#enemyHPratio").css({"width": enemyHPratio*100+"%"});
+                    $("#hpDisplayEnemy").text("-" + playerSpecialAttack + "HP");
+                    $("#hpDisplayEnemy").addClass("hpAnimation");
+                    setTimeout(function() {                        
+                        $("#hpDisplayEnemy").removeClass("hpAnimation")}, 1200);
+                });
+                
+                // Slight pause then go to enemy attack function
+                setTimeout(enemyAction, 3000);    
+            }//end outer if
+
+            // If enemy has been defeated, update stats, prompts and call nextLevelStart()
+            else if (enemyHP <= 0) {
+                winCount++;
+                $("#gamePrompt").text("You defeated " + playerEnemy.name + "!");        
+                $("#enemyHP").text(0);
+                $("#enemyHPratio").css({"width": 0+"%"});
+                hideEnemySprite();
+
+                // If winCount < 2, move on to next level
+                if (winCount < 2) {
+                    nextLevelStart();
+                    showNextLevelBtn();
+                }
+                // Else, move on to final level
+                else {
+                    finalLevelStart();
+                    showFinalLevelBtn();
+                }
+            }//end outer else if
+            
+        }// end specialAction()
+    )// end action jQuery
+});// end document ready function
+
+// ENEMY ATTACK FUNCTION ----------------------------------------------------------------
     function enemyAction() {
         // playerAnimation();
         playerHP = playerHP - enemyAttack;
@@ -303,6 +365,10 @@ $(document).ready(function() {
                 $("#gamePrompt").text(playerEnemy.name + " attacked you with " + enemyAttack + " damage!");   
                 $("#playerHP").text(playerHP);
                 $("#playerHPratio").css({"width": playerHPratio*100+"%"});
+                $("#hpDisplayPlayer").text("-" + enemyAttack + "HP");
+                $("#hpDisplayPlayer").addClass("hpAnimation");
+                setTimeout(function() {                        
+                    $("#hpDisplayPlayer").removeClass("hpAnimation")}, 1200);
             });    
             
         }//end if
@@ -319,52 +385,18 @@ $(document).ready(function() {
         }
     }
 
-// PLAYER SPECIAL ATTACK FUNCTION -------------------------------------------------
-$(document).ready(function() {
-    $("#playerSpecialAction").click(
 
-// Player special attack (reduces enemy HP by special attack-stats of character and updates enemy HP in DOM, then disables special attack button)
-function specialAction() {
-    removeSpecialAction(); 
-    enemyHP = enemyHP - playerSpecialAttack;
-    enemyHPratio =  enemyHP / enemyHPorig;
-
-    // Set HP bar to red if under 30% HP
-    if (enemyHPratio < 0.3) {
-        $(document).ready(function() {
-            $("#enemyHPratio").removeClass("bg-primary");        
-            $("#enemyHPratio").addClass("bg-danger"); 
-    }); 
-    }//end if
-
-    //Update enemy HP stats, game prompt
-    $(document).ready(function() {
-        $("#gamePrompt").text("You used the special attack on " + playerEnemy.name + " and dealt " + playerSpecialAttack + " damage!"); 
-        $("#enemyHP").text(enemyHP);
-        $("#enemyHPratio").css({"width": enemyHPratio*100+"%"});
-    });
-    
-    // Slight pause then go to enemy attack function
-    setTimeout(enemyAction, 3000);    
-
-}// end specialAction()
-)// end action jQuery
-});// end document ready function
-
-
-// GAME WIN
+// GAME WIN ------------------------------------------------------------------------------
 
 function gameWin() {
     removePlayArea();    
 }
 
-
-// GAME OVER
+// GAME OVER -----------------------------------------------------------------------------
 
 function gameOver() {
     removePlayArea();
 }
-
 
 
 // HIDE AND REMOVE SECTIONS --------------------------------------------------------------
@@ -458,3 +490,7 @@ function playerAnimation() {
 // function launchAnimation() {
 //     document.getElementById("playArea").style.animation = "launchAnimation 10s ease-in 1";
 // }
+
+function attackAnimation() {
+
+}

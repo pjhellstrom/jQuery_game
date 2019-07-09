@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     font-family: 'Staatliches', cursive;
+    background-color: #292b2c;
     /* border: 2px solid yellowgreen; */
 }
 
@@ -10,7 +11,7 @@
 }
 
 .jumbotron {
-    background: url(/assets/images/background.jpg);
+    background: url(../assets/images/background.jpg);
     background-size: cover;
     background-position: 0% 70%;
     height: 100vh;
@@ -34,7 +35,7 @@ footer {
 }
 
 #gamePromptStyle {
-    background-color:#444;
+    background-color:#292b2c;
     color: orange;
 }
 
@@ -71,11 +72,70 @@ footer {
 }
 .characterSprites {
     width: 230px;
+    border-radius: 10%;
+    border: 5px solid rgb(23, 126, 194);
 }
 
 .characterButton {
-  width: 100px;
+  width: 120px;
+  font-size: 1.8em;
 }
+
+#selectionScreenHeader {
+  font-size: 3.3em;
+}
+
+#characterConfirm {
+  font-size: 2em;
+  margin: 15px;
+}
+
+#playArea h2 {
+  background-color: unset;
+  margin: 10px;
+}
+
+#playArea h1 {
+  margin-top: 10px;
+  background-color: #292b2c;
+}
+
+.cssField {
+  background-color: unset;
+}
+
+.cssField2 {
+  background-color: unset;
+  color: #fff;
+  font-size: 1.7em;
+}
+
+.playDivision, .spriteFormat, .bossSpriteFormat {
+  background-color: #fff;
+  border-radius: 5%;
+}
+
+.playDivision {
+  margin-bottom: 10px;
+  background-color: unset;
+}
+
+.playDivision button {
+  font-size: 1.5em;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.playDivision h5 {
+  font-size: 1.7em;
+  background-color: unset;
+}
+
+.hiddenButtons {
+  background-color: #292b2c;
+}
+
 
 /* Animations */
 
@@ -104,21 +164,21 @@ footer {
 
 .textShimmer {
   overflow: hidden;
-  background: linear-gradient(90deg, #ccc, #000, #ccc);
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.2), #fff);
   background-size: 85%;
-  animation: animate 6s linear infinite;
+  animation: animate 5s linear infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
 #gameStart {
     text-transform: uppercase;
-    font-size: 2em;
+    font-size: 1.5em;
     letter-spacing: 2px;
     overflow: hidden;
-    background: linear-gradient(90deg, #fff, rgb(248, 185, 185), #fff);
+    background: linear-gradient(90deg, #fff, rgba(121, 121, 121, 0.171), #fff);
     background-size: 85%;
-    animation: animate 1s linear infinite;
+    animation: animate 3s linear infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: rgba(255, 255, 255, 0);
   }
@@ -143,7 +203,8 @@ footer {
   top: -15px;
   left: 10%;
   color: #fff;
-  font-size: 2.3em;
+  font-size: 2em;
+  background-color: unset;
   text-shadow: 0px -2px 0 #000, 0px 2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000;
 }
 
@@ -152,8 +213,9 @@ footer {
   float:right;
   top: -20px;
   right: 10%;
-  font-size: 2.3em;
+  font-size: 2em;
   color: #fff;
+  background-color: unset;
   text-shadow: 0px -2px 0 #000, 0px 2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000;
 }
 
@@ -230,3 +292,45 @@ footer {
         0 50px 25px rgba(0, 0, 0, 0.2);
     }
   }
+
+.spriteArea {
+  position: relative;
+  height: 250px;
+}
+
+#spriteFormat {
+
+}
+
+.hpDisplaySprite {
+  visibility: hidden;
+}
+
+.hpAnimation {
+  visibility: visible;
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  font-size: 3em;
+  background-color: unset;
+  text-shadow: 0 1px 0 #ffd900, 0 2px 0 #ffd900, 0 3px 0 #ffd900, 0 4px 0 #ffd900,
+  0 5px 0 #ffd900, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+  0 9px 0 transparent, 0 10px 10px rgba(253, 234, 66, 0.5);
+  transform: scale(0);
+  animation: hpAnimation 1.2s ease-out 1;
+}
+
+@keyframes hpAnimation {
+  0% {
+    transform: scale(.5);
+    transform-origin: 50%;
+  }
+  70% {
+    transform: scale(2);
+    transform-origin: 50%;
+  }
+  100% {
+    transform: scale(0);
+    transform-origin: 50%;
+  }
+}
