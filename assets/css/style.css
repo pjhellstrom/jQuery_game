@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     font-family: 'Staatliches', cursive;
-    border: 2px solid yellowgreen;
+    /* border: 2px solid yellowgreen; */
 }
 
 .navbar {
@@ -39,10 +39,16 @@ footer {
 }
 
 
-#playerSprite, #enemySprite {
+.spriteFormat {
     width: 250px;
     margin: -10px;
     padding-bottom: 40px;
+}
+
+.bossSpriteFormat {
+  width: 400px;
+  margin: -10px;
+  padding-bottom: 40px;
 }
 
 #playGame {
@@ -50,7 +56,7 @@ footer {
     font-weight: ;
 }
 
-.playDivision {
+.playDivisionRow {
 
 }
 

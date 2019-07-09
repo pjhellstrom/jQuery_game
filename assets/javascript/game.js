@@ -208,13 +208,17 @@ function enemySelectFinal() {
     enemyHP = enemyHPorig = playerEnemy.hp;
     enemyAttack = playerEnemy.attack;
     $(document).ready(function() {
-        $("#enemySprite").attr("src","./assets/images/" + playerEnemy.name + ".gif");  
+        $("#enemySprite").attr("src","./assets/images/" + playerEnemy.name + ".gif");
+        $("#enemySprite").removeClass("spriteFormat");        
+        $("#enemySprite").addClass("bossSpriteFormat");           
         $("#enemyName").text(playerEnemy.name);
         $("#enemyHP").text(playerEnemy.hp);
         $("#enemyHPorig").text(playerEnemy.hp);
         $("#enemyHPratio").css({"width": 100+"%"});
         $("#enemyHPratio").removeClass("bg-danger");        
-        $("#enemyHPratio").addClass("bg-primary"); 
+        $("#enemyHPratio").addClass("bg-primary");
+        $("#enemyHPratio").removeClass("bg-danger");        
+        $("#enemyHPratio").addClass("bg-primary");  
     });
 
     unhideEnemySprite();
