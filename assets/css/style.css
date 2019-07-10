@@ -23,7 +23,7 @@
   background-color: unset;
 }
 
-#startHeader, #endHeader {
+#startHeader {
   align-items: center;
   position: absolute;
   background-color: unset;
@@ -292,31 +292,45 @@ footer {
 }
 
 /* End Screen */
-
 #endScreen {
-
+  display: flex;
+  flex-direction: column;
 }
 
 #endHeader {
-  margin-top: 200px;
+  justify-content: center;
+  align-items: center;
+  background-color: unset;
+  top: 10%;
+  margin: 10px;
+  font-size: 7em;
+  text-shadow: 7px 7px 20px black;
+}
+
+#endHeader {
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 #endSpriteContainer {
-  width: 500px;
-  height: 500px;
-  margin-top: 400px;
-  border: solid 2px green;
+  width: 420px;
+  height: 420px;
 }
 
 #endSpin {
   position: relative;
   width: 100%;
-  animation: spin 4s ease-in-out infinite;
+  animation: spin 5s ease-in-out infinite;
 }
 
 #endSprite {
   position: absolute;
-  margin: 100px;
+  margin: 60px;
+  padding-top: 20px;
+}
+
+#restartButton {
+  top: 80%;
 }
 
 @keyframes spin {
