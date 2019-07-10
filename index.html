@@ -10,74 +10,32 @@
     <script type="text/javascript" src="./assets/javascript/game.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
-    <title>An RPG Game</title>
+    <title>RPG Game</title>
 
 </head>
 <body>
 
 <!--Navigation-->
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">RPG Game</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Restart</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-</nav>
 
 <!-- Main container -->
 <main>
 
-<!--Jumbotron-->
-
-<div class="container-fluid jumbotron" id="introJumbotron">
-    <div class="row">
-
-        <div class="col-12 text-center">
-            <h1 class="text-light">RPG GAME</h1>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" id="jumbotronText">
-            <h3>
-                How to play:
-            </h3>
-            <p class="lead">
-                Click the START button to play.<br>
-                Pick your character and defeat all the enemies to win! <br>
-                You get one special attack.
-            </p>
-            <p class="lead">
-                This app supports desktop and tablet.
-            </p>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 my-auto text-center">
-            <button onclick="gameStart()" class="btn btn-primary btn-lg"><a id="gameStart">Start</a></button>
-        </div>
-
-    </div>   
+<!-- Start screen -->
+<div class="bg-warning startScreenDiv" id="startScreen">
+    <div class="row" id="startRow">
+        <h1 class="text-light bounce" id="startHeader">RPG Game!</h1>
+        <button onclick="gameStart()" class="btn btn-lg btn-dark buttonStyle"><span id="gameStart">Start</span></button>
+    </div>
 </div> <!-- end of Jumbotron -->
 
+
+
 <!--Main game section-->
-<div class="container-fluid text-center" id="" style="visibility: hidden">
-        <!--Top row game wrapper-->
-        <div class="row" id="gamePromptStyle">
-            <h1 class="mx-auto" id="gamePrompt"> F I G H T ! </h1>
-        </div>
+<div class="container-fluid text-center" id="mainGameArea" style="display: none;">
 
             <!-- Character selection area -->
-            <div class="col-12 my-auto" id="selectionArea" style="visibility: hidden">
+            <div class="col-12 my-auto" id="selectionArea" style="display: none;">
                 
                 <h1 class="textShimmer text-light" id="selectionScreenHeader">Select Player</h1>
                 <h3 class="text-muted">Your opponents will be picked randomly</h3>
@@ -118,7 +76,7 @@
             </div> <!-- end Character selection area -->
 
             <!-- Play area -->
-            <div class="col-12" id="playArea" style="visibility: hidden">
+            <div class="col-12" id="playArea" style="display: none;">
 
                 <div class="row playDivisionRow"> <!-- Character wrapper-->
                     <div class="col-5 mx-auto playDivision playDivPlayer">
@@ -146,8 +104,8 @@
                 </div> <!-- end Character wrapper-->
 
                 <div class="row statsWrapper"> <!-- Stats wrapper-->
-                    <div class="col-5 mx-auto statsPlayer">
-                        <h5>HP</h5>
+                    <div class="col-5 statsPlayer">
+                        <h5 class="text-light">HP</h5>
                         <div class="progress" style="height: 30px; margin:10px;">
                             <div class="progress-bar bg-primary" id="playerHPratio" style="width:0%;"></div>
                         </div>
@@ -161,7 +119,7 @@
                     <div class="col-1 mx-auto"></div>
 
                     <div class="col-5 mx-auto statsEnemy">
-                        <h5>HP</h5>
+                        <h5 class="text-light">HP</h5>
                         <div class="progress" style="height: 30px; margin:10px;">
                             <div class="progress-bar bg-primary" id="enemyHPratio" style="width:0%;"></div>
                         </div>
@@ -174,12 +132,12 @@
 
                 </div> <!-- end Stats wrapper-->
 
-                <div class="row playDivision">
-                    <div class="col-5">
+                <div class="row">
+                    <div class="col-5 attackButtonRow ">
                         <h5 class="cssField2">Your attacks:</h5>
                         <div class="row cssField mx-auto">
-                            <button class="btn btn-primary btn-lg mx-auto clickable" id="playerAction"><a>Attack</a></button>     
-                            <button class="btn btn-danger btn-lg mx-auto clickable"id="playerSpecialAction"><a>Special Attack</a></button>     
+                            <button class="btn btn-primary attackButtons btn-lg mx-auto clickable" id="playerAction"><a>Attack</a></button>     
+                            <button class="btn btn-danger attackButtons btn-lg mx-auto clickable"id="playerSpecialAction"><a>Special Attack</a></button>     
                         </div>
                         <br>  
                     </div>
@@ -187,30 +145,30 @@
                     <div class="col-5"></div>
                 </div>
 
-                <div class="row hiddenButtons"> <!-- Hidden button wrapper -->
+                <div class="row hiddenButtons" style="background-color: #fff;"> <!-- Hidden button wrapper -->
                     <button class="btn btn-warning btn-lg mx-auto" style="visibility: hidden;" id="nextLevelBtn"><a>On to next level</a></button>
                     <button class="btn btn-warning btn-lg mx-auto" style="visibility: hidden;" id="finalLevelBtn"><a>On the final level</a></button>
                 </div>
 
             </div> <!-- end Play area -->
 
-            <!-- End screen area -->
-            <div id="endScreen">
-
-            </div>
- 
 </main> <!--End of Main Game Div-->  
 
-<!-- <div class="row">
-    <div class="winWrapper">
-        <h1 id="bouncyLetters">
-            <span>W</span>
-            <span>I</span>
-            <span>N</span>
-            <span>!</span>
-        </h1>
+<!-- Game over -->
+<div class="" id="endScreen" style="display: none;">
+    <div class="row" id="startRow">
+        <h1 class="text-light" id="endHeader"></h1>
+        <div id="endSpriteContainer">
+                <img class="" id="endSprite" src="">
+                <img class="" id="endSpin" src="">
+        </div>
+        <button class="btn btn-lg btn-dark buttonStyle" id="restartButton">
+            <span>Play again </span>
+        </button>
     </div>
-</div> -->
+</div>
+ 
+
 
     <!--Footer-->
 

@@ -20,19 +20,20 @@ var clickDisabled = false;
 var character0 = {name: "Monkey", hp: 120, attack: 25, specialattack: 150};
 var character1 = {name: "Bear", hp: 70, attack: 30, specialattack: 50};
 var character2 = {name: "Fox", hp: 200, attack: 15, specialattack: 30};
-var character3 = {name: "Dragon", hp: 300, attack: 50, specialattack: 70};
+var character3 = {name: "Giraffe", hp: 300, attack: 50, specialattack: 70};
 
 const characterChoices = [character0, character1, character2];
 
 // GAME START FUNCTION ------------------------------------------------------
 function gameStart() {
-    removeIntro();
-    unhideSelectionArea();
+    hideStartScreen();
+    showMainGameArea();
+    showSelectionArea();
     getCharacterSelection();
     // Wait for character selection and play button click
     $(document).ready(function() {
         $("#characterConfirm").click(function() {
-        removeSelectionArea();
+        hideSelectionArea();
         });
     });
 }; //end gameStart()
@@ -64,6 +65,38 @@ function finalLevelStart() {
     }//end finalLevelStart()
 
 
+// GAME RESTART FUNCTION ----------------------------------------------------
+$(document).ready(function() {
+    $("#restartButton").click(resetGameStat);
+    $("#restartButton").click(showMainGameArea);
+    $("#restartButton").click(hidePlayArea);
+    $("#restartButton").click(function() {$("#playerHPratio").removeClass("bg-danger")});        
+    $("#restartButton").click(function() {$("#playerHPratio").addClass("bg-primary")});
+    $("#restartButton").click(showSelectionArea);
+    $("#restartButton").click(hideEndScreen);
+});
+
+// RESET GAME START ---------------------------------------------------------
+function resetGameStat() {
+    playerCharacter = {hp:0, attack:0, specialattack:0};
+    playerEnemy = {hp:0, attack:0, specialattack:0};
+    playerHP = 0;
+    playerAttack = 0;
+    enemyHP = 0;
+    enemyAttack = 0;
+
+    playerHPorig = 0;
+    playerHPratio = 0;
+    enemyHPorig = 0;
+    enemyHPratio = 0;
+
+    winCount = 0;
+
+    randNum = 0;
+
+    clickDisabled = false;
+}
+
 // CHARACTER SELECTION -------------------------------------------------------
 function getCharacterSelection() {
 
@@ -83,8 +116,9 @@ function getCharacterSelection() {
                 $("#characterOption0").addClass("btn-primary");
                 $("#charSel1").removeClass("selectBorder");
                 $("#charSel2").removeClass("selectBorder");
-                $("#charSel1").removeClass("selectBorderNone");
-                $("#charSel2").removeClass("selectBorderNone");
+                $("#charSel0").removeClass("selectBorderNone");                  
+                $("#charSel1").addClass("selectBorderNone");
+                $("#charSel2").addClass("selectBorderNone");
                 $("#charSel0").addClass("selectBorder");        
                          
             //Update selection screen header
@@ -109,9 +143,10 @@ function getCharacterSelection() {
                 $("#characterOption1").addClass("btn-primary"); 
                 $("#charSel0").removeClass("selectBorder");
                 $("#charSel2").removeClass("selectBorder");
-                $("#charSel0").removeClass("selectBorderNone");
-                $("#charSel2").removeClass("selectBorderNone");
-                $("#charSel1").addClass("selectBorder");  
+                $("#charSel1").removeClass("selectBorderNone");                  
+                $("#charSel0").addClass("selectBorderNone");
+                $("#charSel2").addClass("selectBorderNone");
+                $("#charSel1").addClass("selectBorder");     
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
             $("#selectionScreenHeader").addClass("selectionConfirm");
@@ -135,9 +170,10 @@ function getCharacterSelection() {
                 $("#characterOption2").addClass("btn-primary"); 
                 $("#charSel0").removeClass("selectBorder");
                 $("#charSel1").removeClass("selectBorder");
-                $("#charSel0").removeClass("selectBorderNone");
-                $("#charSel1").removeClass("selectBorderNone");
-                $("#charSel2").addClass("selectBorder");  
+                $("#charSel2").removeClass("selectBorderNone");                  
+                $("#charSel0").addClass("selectBorderNone");
+                $("#charSel1").addClass("selectBorderNone");
+                $("#charSel2").addClass("selectBorder");   
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!")
             unhidecharacterConfirmbtn();            
@@ -268,7 +304,6 @@ $(document).ready(function() {
 
                 // Update enemy HP stats, game prompt, show HP animation
                 $(document).ready(function() {
-                    $("#gamePrompt").text("You attacked " + playerEnemy.name + " with " + playerAttack + " damage!");        
                     $("#enemyHP").text(enemyHP);
                     $("#enemyHPratio").css({"width": enemyHPratio*100+"%"});
                     $("#hpDisplayEnemy").text("-" + playerAttack + "HP");
@@ -330,7 +365,6 @@ $(document).ready(function() {
 
                 //Update enemy HP stats, game prompt
                 $(document).ready(function() {
-                    $("#gamePrompt").text("You used the special attack on " + playerEnemy.name + " and dealt " + playerSpecialAttack + " damage!"); 
                     $("#enemyHP").text(enemyHP);
                     $("#enemyHPratio").css({"width": enemyHPratio*100+"%"});
                     $("#hpDisplayEnemy").text("-" + playerSpecialAttack + "HP");
@@ -351,16 +385,22 @@ $(document).ready(function() {
                 $("#enemyHPratio").css({"width": 0+"%"});
                 hideEnemySprite();
 
-                // If winCount < 2, move on to next level
-                if (winCount < 2) {
-                    nextLevelStart();
-                    showNextLevelBtn();
+                // If winCount > 2, run gameWin()
+                if (winCount > 2) {
+                    setTimeout(gameWin, 2500);
                 }
-                // Else, move on to final level
                 else {
-                    finalLevelStart();
-                    showFinalLevelBtn();
-                }
+                    // If winCount < 2, move on to next level
+                    if (winCount < 2) {
+                        nextLevelStart();
+                        showNextLevelBtn();
+                    }
+                    // Else, move on to final level
+                    else {
+                        finalLevelStart();
+                        showFinalLevelBtn();
+                    }
+                }//end else
             }//end outer else if
             
         }// end specialAction()
@@ -369,10 +409,11 @@ $(document).ready(function() {
 
 // ENEMY ATTACK FUNCTION ----------------------------------------------------------------
 function enemyAction() {
+
     // playerAnimation();
     playerHP = playerHP - enemyAttack;
     playerHPratio = playerHP / playerHPorig;
-    
+    $("#playerName").text(playerEnemy.name + " is attacking!");
     // If to check if game should continue, playerHP > 0
     if (playerHP > 0) {
 
@@ -386,7 +427,6 @@ function enemyAction() {
 
         //Update player HP stats, game prompt
         $(document).ready(function() {
-            $("#gamePrompt").text(playerEnemy.name + " attacked you with " + enemyAttack + " damage!");   
             $("#playerHP").text(playerHP);
             $("#playerHPratio").css({"width": playerHPratio*100+"%"});
             $("#hpDisplayPlayer").text("-" + enemyAttack + "HP");
@@ -405,20 +445,38 @@ function enemyAction() {
             $("#playerHPratio").css({"width": 0+"%"});
             $("#playerName").text("GAME OVER")
         }); 
-        setTimeout(gameOver, 3000);
+        setTimeout(gameLose, 2500);
     }
 }
 
 // GAME WIN ------------------------------------------------------------------------------
 
 function gameWin() {
-    removePlayArea();    
+    hideMainGameArea();
+    loadWinScreen();
+    showEndScreen();    
 }
 
 // GAME OVER -----------------------------------------------------------------------------
 
-function gameOver() {
-    removePlayArea();
+function gameLose() {
+    hideMainGameArea();
+    loadLoseScreen();
+    showEndScreen();
+}
+
+// LOAD END SCREEN ITEMS -----------------------------------------------------------------
+
+function loadWinScreen() {
+    $("#endHeader").text(playerCharacter.name + " wins!")
+    $("#endSprite").attr("src","./assets/images/" + playerCharacter.name + ".gif");  
+    $("#endSpin").attr("src","./assets/images/spin_win.png");
+}
+
+function loadLoseScreen() {
+    $("#endHeader").text("Sorry, try again!")
+    $("#endSprite").attr("src","./assets/images/" + playerCharacter.name + ".gif");
+    $("#endSpin").attr("src","./assets/images/spin_lose.png");
 }
 
 // CLICK DISABLE FUNCTION ---------------------------------------------------------------
@@ -429,39 +487,62 @@ function clickFreeze() {
 
 function clickUnfreeze() {
     $(".clickable").css("pointer-events", "auto");
+    $("#playerName").text(playerCharacter.name);
 }//end clickUnfreeze()
+
 
 // HIDE AND REMOVE SECTIONS --------------------------------------------------------------
 
-// Function to remove intro jumbotron
-function removeIntro() {
-    document.getElementById("introJumbotron").remove();
+function hideStartScreen() {
+    $("#startScreen").hide();
 }
 
-// Function to unhide selection area
-function unhideSelectionArea() {
-    document.getElementById("selectionArea").style.visibility = "visible";    
+function showStartScreen() {
+    $("#startScreen").show();
 }
 
-// Function to unhide characterConfirm button
-function unhidecharacterConfirmbtn() {
-    document.getElementById("characterConfirm").style.visibility = "visible";
+function showEndScreen() {
+    $("#endScreen").show();
 }
 
-// Function to remove selection area
-function removeSelectionArea() {
-    document.getElementById("selectionArea").remove();  
-    unhidePlayArea();  
+function hideEndScreen() {
+    $("#endScreen").hide();
 }
 
-// Function to unhide play area
-function unhidePlayArea() {
-    document.getElementById("playArea").style.visibility = "visible";
+function showMainGameArea() {
+    $("#mainGameArea").show();
+}
+
+function hideMainGameArea() {
+    $("#mainGameArea").hide();
+}
+
+
+function showSelectionArea() {
+    $("#selectionArea").show();
+}
+
+function hideSelectionArea() {
+    $("#selectionArea").hide();
+    showPlayArea();  
+}
+
+function showPlayArea() {
+    $("#playArea").show();
+}
+
+function hidePlayArea() {
+    $("#playArea").hide();
 }
 
 // Function to remove special attack button
 function removeSpecialAction() {
     document.getElementById("playerSpecialAction").remove();    
+}
+
+// Function to unhide characterConfirm button
+function unhidecharacterConfirmbtn() {
+    document.getElementById("characterConfirm").style.visibility = "visible";
 }
 
 // Function to hide enemy sprite
@@ -504,10 +585,6 @@ function removeFinalLevelBtn() {
     document.getElementById("finalLevelBtn").remove();
 }
 
-// Function to remove play area
-function removePlayArea() {
-    document.getElementById("playArea").remove();
-}
 
 
 // ANIMATIONS ----------------------------------------------------------------------------
