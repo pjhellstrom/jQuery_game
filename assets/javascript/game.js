@@ -15,6 +15,8 @@ var winCount = 0;
 
 var randNum = 0;
 
+var clickDisabled = false;
+
 var character0 = {name: "Monkey", hp: 120, attack: 25, specialattack: 150};
 var character1 = {name: "Bear", hp: 70, attack: 30, specialattack: 50};
 var character2 = {name: "Fox", hp: 200, attack: 15, specialattack: 30};
@@ -62,7 +64,7 @@ function finalLevelStart() {
     }//end finalLevelStart()
 
 
-// One of three choices
+// CHARACTER SELECTION -------------------------------------------------------
 function getCharacterSelection() {
 
     // Select Character 0
@@ -78,7 +80,13 @@ function getCharacterSelection() {
                 $("#characterOption1").addClass("btn-outline-primary");             
                 $("#characterOption2").removeClass("btn-primary");
                 $("#characterOption2").addClass("btn-outline-primary");      
-                $("#characterOption0").addClass("btn-primary"); 
+                $("#characterOption0").addClass("btn-primary");
+                $("#charSel1").removeClass("selectBorder");
+                $("#charSel2").removeClass("selectBorder");
+                $("#charSel1").removeClass("selectBorderNone");
+                $("#charSel2").removeClass("selectBorderNone");
+                $("#charSel0").addClass("selectBorder");        
+                         
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
             unhidecharacterConfirmbtn();
@@ -99,6 +107,11 @@ function getCharacterSelection() {
                 $("#characterOption2").removeClass("btn-primary");
                 $("#characterOption2").addClass("btn-outline-primary");      
                 $("#characterOption1").addClass("btn-primary"); 
+                $("#charSel0").removeClass("selectBorder");
+                $("#charSel2").removeClass("selectBorder");
+                $("#charSel0").removeClass("selectBorderNone");
+                $("#charSel2").removeClass("selectBorderNone");
+                $("#charSel1").addClass("selectBorder");  
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
             $("#selectionScreenHeader").addClass("selectionConfirm");
@@ -120,6 +133,11 @@ function getCharacterSelection() {
                 $("#characterOption1").removeClass("btn-primary");
                 $("#characterOption1").addClass("btn-outline-primary");      
                 $("#characterOption2").addClass("btn-primary"); 
+                $("#charSel0").removeClass("selectBorder");
+                $("#charSel1").removeClass("selectBorder");
+                $("#charSel0").removeClass("selectBorderNone");
+                $("#charSel1").removeClass("selectBorderNone");
+                $("#charSel2").addClass("selectBorder");  
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!")
             unhidecharacterConfirmbtn();            
@@ -232,7 +250,9 @@ $(document).ready(function() {
     $("#playerAction").click(
         // Player attack (reduces enemy HP by attack-stats of character and updates enemy HP in DOM)
         function action() {
-            enemyAnimation();
+            // Freeze click for short moment
+            clickFreeze();
+            setTimeout(clickUnfreeze, 2500);
             enemyHP = enemyHP - playerAttack;
             enemyHPratio =  enemyHP / enemyHPorig;
 
@@ -257,7 +277,7 @@ $(document).ready(function() {
                         $("#hpDisplayEnemy").removeClass("hpAnimation")}, 1200);
                 });
                 // Slight pause then go to enemy attack function
-                setTimeout(enemyAction, 3000);
+                setTimeout(enemyAction, 1500);
             }//end outer if
 
             // If enemy has been defeated, update stats, prompts and call nextLevelStart()
@@ -290,6 +310,10 @@ $(document).ready(function() {
 
         // Player special attack (reduces enemy HP by special attack-stats of character and updates enemy HP in DOM, then disables special attack button)
         function specialAction() {
+            // Freeze click for short moment
+            clickFreeze();
+            setTimeout(clickUnfreeze, 2500);
+            //Remove button (sp attack only available once)
             removeSpecialAction(); 
             enemyHP = enemyHP - playerSpecialAttack;
             enemyHPratio =  enemyHP / enemyHPorig;
@@ -316,7 +340,7 @@ $(document).ready(function() {
                 });
                 
                 // Slight pause then go to enemy attack function
-                setTimeout(enemyAction, 3000);    
+                setTimeout(enemyAction, 1500);    
             }//end outer if
 
             // If enemy has been defeated, update stats, prompts and call nextLevelStart()
@@ -344,47 +368,46 @@ $(document).ready(function() {
 });// end document ready function
 
 // ENEMY ATTACK FUNCTION ----------------------------------------------------------------
-    function enemyAction() {
-        // playerAnimation();
-        playerHP = playerHP - enemyAttack;
-        playerHPratio = playerHP / playerHPorig;
-        
-        // If to check if game should continue, playerHP > 0
-        if (playerHP > 0) {
+function enemyAction() {
+    // playerAnimation();
+    playerHP = playerHP - enemyAttack;
+    playerHPratio = playerHP / playerHPorig;
+    
+    // If to check if game should continue, playerHP > 0
+    if (playerHP > 0) {
 
-            // Set HP bar to red if under 30% HP
-            if (playerHPratio < 0.3) {
-            $(document).ready(function() {
-                $("#playerHPratio").removeClass("bg-primary");        
-                $("#playerHPratio").addClass("bg-danger"); 
-            }); 
-            }//end if
-
-            //Update player HP stats, game prompt
-            $(document).ready(function() {
-                $("#gamePrompt").text(playerEnemy.name + " attacked you with " + enemyAttack + " damage!");   
-                $("#playerHP").text(playerHP);
-                $("#playerHPratio").css({"width": playerHPratio*100+"%"});
-                $("#hpDisplayPlayer").text("-" + enemyAttack + "HP");
-                $("#hpDisplayPlayer").addClass("hpAnimation");
-                setTimeout(function() {                        
-                    $("#hpDisplayPlayer").removeClass("hpAnimation")}, 1200);
-            });    
-            
+        // Set HP bar to red if under 30% HP
+        if (playerHPratio < 0.3) {
+        $(document).ready(function() {
+            $("#playerHPratio").removeClass("bg-primary");        
+            $("#playerHPratio").addClass("bg-danger"); 
+        }); 
         }//end if
 
-        // Else if player has been defeated by enemy
-        else if (playerHP <=0) {
-            $(document).ready(function() {
-                $("#gamePrompt").text(playerEnemy.name + " defeated you!");   
-                $("#playerHP").text(0);
-                $("#playerHPratio").css({"width": 0+"%"});
-                $("#playerName").text("GAME OVER")
-            }); 
-            setTimeout(gameOver, 3000);
-        }
-    }
+        //Update player HP stats, game prompt
+        $(document).ready(function() {
+            $("#gamePrompt").text(playerEnemy.name + " attacked you with " + enemyAttack + " damage!");   
+            $("#playerHP").text(playerHP);
+            $("#playerHPratio").css({"width": playerHPratio*100+"%"});
+            $("#hpDisplayPlayer").text("-" + enemyAttack + "HP");
+            $("#hpDisplayPlayer").addClass("hpAnimation");
+            setTimeout(function() {                        
+                $("#hpDisplayPlayer").removeClass("hpAnimation")}, 1200);
+        });    
+        
+    }//end if
 
+    // Else if player has been defeated by enemy
+    else if (playerHP <=0) {
+        $(document).ready(function() {
+            $("#gamePrompt").text(playerEnemy.name + " defeated you!");   
+            $("#playerHP").text(0);
+            $("#playerHPratio").css({"width": 0+"%"});
+            $("#playerName").text("GAME OVER")
+        }); 
+        setTimeout(gameOver, 3000);
+    }
+}
 
 // GAME WIN ------------------------------------------------------------------------------
 
@@ -398,6 +421,15 @@ function gameOver() {
     removePlayArea();
 }
 
+// CLICK DISABLE FUNCTION ---------------------------------------------------------------
+
+function clickFreeze() {
+    $(".clickable").css("pointer-events", "none");
+}//end clickFreeze()
+
+function clickUnfreeze() {
+    $(".clickable").css("pointer-events", "auto");
+}//end clickUnfreeze()
 
 // HIDE AND REMOVE SECTIONS --------------------------------------------------------------
 

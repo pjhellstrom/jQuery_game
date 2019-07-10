@@ -92,17 +92,17 @@
 
                         <div class="row">
                             <div class="col-4 characterSelectBox">                  
-                                <img class="characterSprites my-auto mx-auto" src="./assets/images/Monkey.gif">
+                                <img class="characterSprites selectBorderNone my-auto mx-auto" id="charSel0" src="./assets/images/Monkey.gif">
                                 <button class="btn btn-lg btn-outline-primary characterButton my-auto mx-auto" id="characterOption0">Monkey</button>
                             </div>
 
                             <div class="col-4 characterSelectBox">                  
-                                <img class="characterSprites my-auto mx-auto" src="./assets/images/Bear.gif">
+                                <img class="characterSprites selectBorderNone my-auto mx-auto" id="charSel1" src="./assets/images/Bear.gif">
                                 <button class="btn btn-lg btn-outline-primary characterButton my-auto mx-auto" id="characterOption1">Bear</button>
                             </div>
 
                             <div class="col-4 characterSelectBox">                  
-                                <img class="characterSprites my-auto mx-auto" src="./assets/images/Fox.gif">
+                                <img class="characterSprites selectBorderNone my-auto mx-auto" id="charSel2" src="./assets/images/Fox.gif">
                                 <button class="btn btn-lg btn-outline-primary characterButton my-auto mx-auto" id="characterOption2">Fox</button>
                             </div>
                         </div>
@@ -178,8 +178,8 @@
                     <div class="col-5">
                         <h5 class="cssField2">Your attacks:</h5>
                         <div class="row cssField mx-auto">
-                            <button class="btn btn-primary btn-lg mx-auto" id="playerAction"><a>Attack</a></button>     
-                            <button class="btn btn-danger btn-lg mx-auto"id="playerSpecialAction"><a>Special Attack</a></button>     
+                            <button class="btn btn-primary btn-lg mx-auto clickable" id="playerAction"><a>Attack</a></button>     
+                            <button class="btn btn-danger btn-lg mx-auto clickable"id="playerSpecialAction"><a>Special Attack</a></button>     
                         </div>
                         <br>  
                     </div>
@@ -194,6 +194,10 @@
 
             </div> <!-- end Play area -->
 
+            <!-- End screen area -->
+            <div id="endScreen">
+
+            </div>
  
 </main> <!--End of Main Game Div-->  
 
