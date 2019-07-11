@@ -200,7 +200,7 @@ footer {
 
 .textShimmer {
   overflow: hidden;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.6));
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
   background-size: 85%;
   animation: shimmer 5s linear infinite;
   -webkit-background-clip: text;
