@@ -17,10 +17,10 @@ var randNum = 0;
 
 var clickDisabled = false;
 
-var character0 = {name: "Monkey", hp: 120, attack: 25, specialattack: 150};
-var character1 = {name: "Bear", hp: 70, attack: 30, specialattack: 50};
-var character2 = {name: "Fox", hp: 200, attack: 15, specialattack: 30};
-var character3 = {name: "Giraffe", hp: 300, attack: 50, specialattack: 70};
+var character0 = {name: "Monkey", hp: 120, attack: 50, specialattack: 150};
+var character1 = {name: "Bear", hp: 150, attack: 45, specialattack: 50};
+var character2 = {name: "Fox", hp: 130, attack: 20, specialattack: 30};
+var character3 = {name: "Giraffe", hp: 200, attack: 10, specialattack: 70};
 
 const characterChoices = [character0, character1, character2];
 
@@ -45,7 +45,7 @@ function nextLevelStart() {
 // When next level button is clicked
     $(document).ready(function() {
         $("#nextLevelBtn").click(function() {
-            removeNextLevelBtn();
+            hideNextLevelBtn();
             enemySelect2();
         });
     });
@@ -67,13 +67,31 @@ function finalLevelStart() {
 
 // GAME RESTART FUNCTION ----------------------------------------------------
 $(document).ready(function() {
+
     $("#restartButton").click(resetGameStat);
     $("#restartButton").click(showMainGameArea);
     $("#restartButton").click(hidePlayArea);
+    $("#restartButton").click(showSelectionArea);
+    $("#restartButton").click(showEnemySprite);
+    $("#restartButton").click(hideEndScreen);
+    $("#restartButton").click(hidecharacterConfirmbtn);
+    $("#restartButton").click(hideNextLevelBtn);
+    $("#restartButton").click(hideFinalLevelBtn);
+    $("#restartButton").click(showSpecialAction);
+
     $("#restartButton").click(function() {$("#playerHPratio").removeClass("bg-danger")});        
     $("#restartButton").click(function() {$("#playerHPratio").addClass("bg-primary")});
-    $("#restartButton").click(showSelectionArea);
-    $("#restartButton").click(hideEndScreen);
+    $("#restartButton").click(function() {$("#enemyHPratio").removeClass("bg-danger")});        
+    $("#restartButton").click(function() {$("#enemyHPratio").addClass("bg-primary")});
+    $("#restartButton").click(function() {$("#charSel0").removeClass("selectBorder")});        
+    $("#restartButton").click(function() {$("#charSel1").removeClass("selectBorder")});        
+    $("#restartButton").click(function() {$("#charSel2").removeClass("selectBorder")});
+    $("#restartButton").click(function() {$("#selectionScreenHeader").text("Select Player")});
+    $("#restartButton").click(function() {$(".characterButton").removeClass("btn-primary")});
+    $("#restartButton").click(function() {$(".characterButton").addClass("btn-outline-primary")});
+    $("#restartButton").click(function() {$("#enemySprite").removeClass("bossSpriteFormat")}); 
+    $("#restartButton").click(function() {$("#enemySprite").addClass("spriteFormat")});
+    
 });
 
 // RESET GAME START ---------------------------------------------------------
@@ -123,7 +141,7 @@ function getCharacterSelection() {
                          
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
-            unhidecharacterConfirmbtn();
+            showcharacterConfirmbtn();
         });
     });
 
@@ -150,7 +168,7 @@ function getCharacterSelection() {
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!");
             $("#selectionScreenHeader").addClass("selectionConfirm");
-            unhidecharacterConfirmbtn();        
+            showcharacterConfirmbtn();        
         });
     });
 
@@ -176,7 +194,7 @@ function getCharacterSelection() {
                 $("#charSel2").addClass("selectBorder");   
             //Update selection screen header
             $("#selectionScreenHeader").text(playerCharacter.name + " selected - Hit the play button!")
-            unhidecharacterConfirmbtn();            
+            showcharacterConfirmbtn();            
         });
     });
 
@@ -251,7 +269,7 @@ function enemySelect2() {
         $("#enemyHPratio").addClass("bg-primary"); 
     });
 
-    unhideEnemySprite();
+    showEnemySprite();
 
     return;
 }//end enemySelect2
@@ -276,7 +294,7 @@ function enemySelectFinal() {
         $("#enemyHPratio").addClass("bg-primary");  
     });
 
-    unhideEnemySprite();
+    showEnemySprite();
 
     return;
 }//end enemySelect2
@@ -348,8 +366,8 @@ $(document).ready(function() {
             // Freeze click for short moment
             clickFreeze();
             setTimeout(clickUnfreeze, 2500);
-            //Remove button (sp attack only available once)
-            removeSpecialAction(); 
+            // Hide button (sp attack only available once)
+            hideSpecialAction(); 
             enemyHP = enemyHP - playerSpecialAttack;
             enemyHPratio =  enemyHP / enemyHPorig;
             
@@ -535,54 +553,44 @@ function hidePlayArea() {
     $("#playArea").hide();
 }
 
-// Function to remove special attack button
-function removeSpecialAction() {
-    document.getElementById("playerSpecialAction").remove();    
+function showSpecialAction() {
+    $("#playerSpecialAction").show();    
 }
 
-// Function to unhide characterConfirm button
-function unhidecharacterConfirmbtn() {
-    document.getElementById("characterConfirm").style.visibility = "visible";
+function hideSpecialAction() {
+    $("#playerSpecialAction").hide();    
 }
 
-// Function to hide enemy sprite
+function showcharacterConfirmbtn() {
+    $("#characterConfirm").show();
+}
+
+function hidecharacterConfirmbtn() {
+    $("#characterConfirm").hide();
+}
+
 function hideEnemySprite() {
-    document.getElementById("enemySprite").style.visibility = "hidden";
+    $("#enemySprite").hide();
 }
 
-// Function to unhide enemy sprite
-function unhideEnemySprite() {
-    document.getElementById("enemySprite").style.visibility = "visible";
+function showEnemySprite() {
+    $("#enemySprite").show();
 }
 
-// Function to show next level button
 function showNextLevelBtn() {
-    document.getElementById("nextLevelBtn").style.visibility = "visible";
+    $("#nextLevelBtn").show();
 }
 
-// Function to hide next level button
 function hideNextLevelBtn() {
-    document.getElementById("nextLevelBtn").style.visibility = "hidden";
+    $("#nextLevelBtn").hide();
 }
 
-// Function to remove next level button
-function removeNextLevelBtn() {
-    document.getElementById("nextLevelBtn").remove();
-}
-
-// Function to show final level button
 function showFinalLevelBtn() {
-    document.getElementById("finalLevelBtn").style.visibility = "visible";
+    $("#finalLevelBtn").show();
 }
 
-// Function to hide final level button
 function hideFinalLevelBtn() {
-    document.getElementById("finalLevelBtn").style.visibility = "hidden";
-}
-
-// Function to remove final level button
-function removeFinalLevelBtn() {
-    document.getElementById("finalLevelBtn").remove();
+    $("#finalLevelBtn").hide();
 }
 
 

@@ -36,8 +36,8 @@
 
             <!-- Character selection area -->
             <div class="col-12 my-auto" id="selectionArea" style="display: none;">
-                
-                <h1 class="textShimmer text-light" id="selectionScreenHeader">Select Player</h1>
+                <div class="empty"></div>
+                <h1 class="textShimmer" id="selectionScreenHeader">Select Player</h1>
                 <h3 class="text-muted">Your opponents will be picked randomly</h3>
                 
                 <div class="row characterChoices">
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-warning btn-lg mx-auto" id="characterConfirm" style="visibility: hidden"><a>Let's play!</a></button>
+                            <button class="btn btn-warning btn-lg mx-auto" id="characterConfirm" style="display: none;"><a>Let's play!</a></button>
                         </div>
 
                 </div> <!-- end row wrapper -->
@@ -77,10 +77,10 @@
 
             <!-- Play area -->
             <div class="col-12" id="playArea" style="display: none;">
-
+                <div class="empty"></div>
                 <div class="row playDivisionRow"> <!-- Character wrapper-->
                     <div class="col-5 mx-auto playDivision playDivPlayer">
-                        <h1 class="textShimmer" id="playerName"></h1>
+                        <h1 class="textShimmer2" id="playerName"></h1>
                         <br>
                         <div class="spriteArea cssField">
                             <img class="spriteFormat" id="playerSprite" src="">
@@ -92,7 +92,7 @@
                     <div class="col-1 mx-auto"></div>
 
                     <div class="col-5 mx-auto playDivision playDivEnemy">
-                        <h1 class="textShimmer" id="enemyName"></h1>
+                        <h1 class="textShimmer2" id="enemyName"></h1>
                         <br>
                         <div class="spriteArea cssField">
                             <img class="spriteFormat" id="enemySprite" src="">
@@ -105,28 +105,28 @@
 
                 <div class="row statsWrapper"> <!-- Stats wrapper-->
                     <div class="col-5 statsPlayer">
-                        <h5 class="text-light">HP</h5>
+                        <h5 class="text-dark">HP</h5>
                         <div class="progress" style="height: 30px; margin:10px;">
                             <div class="progress-bar bg-primary" id="playerHPratio" style="width:0%;"></div>
                         </div>
                         <div id="HPtracker">
-                            <a class="text-light" id="playerHP"></a>         
-                            <a class="text-light" id="">/</a>    
-                            <a class="text-light" id="playerHPorig"></a>     
+                            <a class="text-dark" id="playerHP"></a>         
+                            <a class="text-dark" id="">/</a>    
+                            <a class="text-dark" id="playerHPorig"></a>     
                         </div>         
                     </div>
 
                     <div class="col-1 mx-auto"></div>
 
                     <div class="col-5 mx-auto statsEnemy">
-                        <h5 class="text-light">HP</h5>
+                        <h5 class="text-dark">HP</h5>
                         <div class="progress" style="height: 30px; margin:10px;">
                             <div class="progress-bar bg-primary" id="enemyHPratio" style="width:0%;"></div>
                         </div>
                         <div id="HPtracker">
-                            <a class="text-light" id="enemyHP"></a>
-                            <a class="text-light" id="">/</a>    
-                            <a class="text-light" id="enemyHPorig"></a>   
+                            <a class="text-dark" id="enemyHP"></a>
+                            <a class="text-dark" id="">/</a>    
+                            <a class="text-dark" id="enemyHPorig"></a>   
                         </div>
                     </div>
 
@@ -146,8 +146,8 @@
                 </div>
 
                 <div class="row hiddenButtons" style="background-color: #fff;"> <!-- Hidden button wrapper -->
-                    <button class="btn btn-warning btn-lg mx-auto" style="visibility: hidden;" id="nextLevelBtn"><a>On to next level</a></button>
-                    <button class="btn btn-warning btn-lg mx-auto" style="visibility: hidden;" id="finalLevelBtn"><a>On the final level</a></button>
+                    <button class="btn btn-warning btn-lg mx-auto" style="display: none;" id="nextLevelBtn"><a>On to next level</a></button>
+                    <button class="btn btn-warning btn-lg mx-auto" style="display: none;" id="finalLevelBtn"><a>On the final level</a></button>
                 </div>
 
             </div> <!-- end Play area -->
@@ -162,9 +162,9 @@
                 <img class="" id="endSprite" src="">
                 <img class="" id="endSpin" src="">
         </div>
-        <!-- <button class="btn btn-lg btn-dark buttonStyle" id="restartButton">
+        <button class="btn btn-lg btn-dark buttonStyle" id="restartButton">
             <span>Play again </span>
-        </button> -->
+        </button>
     </div>
 </div>
  
