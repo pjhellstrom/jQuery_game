@@ -11,6 +11,7 @@
   /* background-image: url(/assets/images/gems.png); */
   width: 100vw;
   height: 100vh;
+  background-image: linear-gradient(to bottom right, #EE4000 900px, #00AEEE 200px)
 }
 
 #startRow {
@@ -27,18 +28,31 @@
   align-items: center;
   position: absolute;
   background-color: unset;
-  top: 20%;
+  top: 15%;
   margin: 10px;
   font-size: 7em;
   text-shadow: 7px 7px 20px black;
 }
 
+#startP {
+  align-items: center;
+  position: absolute;
+  top: 36%;
+  font-size: 1.4em;
+  color: rgb(255, 255, 255);
+  background-color: #888;
+  padding: 20px;
+  border-radius: 5%/30%;
+  margin: 5px;
+  box-shadow: 3px 3px 20px black;
+}
+
 .buttonStyle {
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: 55%;
   font-size: 2em;
-  transition: all 500ms;
+  border-radius: 10%/15%;
   cursor: pointer;
   text-shadow: 5px 5px 15px black;
 }
@@ -106,7 +120,7 @@ footer {
 }
 
 .hiddenButtons {
-  margin: 20px;
+  margin: 10px;
 }
 
 .empty {
@@ -138,7 +152,7 @@ footer {
 
 #selectionScreenHeader {
   font-size: 3.3em;
-  color: #777;
+  color: #333;
   padding-bottom: 10px;
 }
 
@@ -292,9 +306,9 @@ footer {
   right: 15%;
   font-size: 3em;
   background-color: unset;
-  text-shadow: 0 1px 0 #ffd900, 0 2px 0 #ffd900, 0 3px 0 #ffd900, 0 4px 0 #ffd900,
-  0 5px 0 #ffd900, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
-  0 9px 0 transparent, 0 10px 10px rgba(253, 234, 66, 0.5);
+  text-shadow: 0 1px 0 #ee4000, 0 2px 0 #ee4000, 0 3px 0 #ee4000, 0 4px 0 #ee4000,
+  0 5px 0 #ee4000, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+  0 9px 0 transparent, 5px 5px 5px rgba(238, 64, 0, 0.5);
   transform: scale(0);
   animation: hpAnimation 1.2s ease-out 1;
 }

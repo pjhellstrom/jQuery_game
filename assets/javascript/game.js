@@ -17,9 +17,9 @@ var randNum = 0;
 
 var clickDisabled = false;
 
-var character0 = {name: "Monkey", hp: 120, attack: 50, specialattack: 150};
-var character1 = {name: "Bear", hp: 150, attack: 45, specialattack: 50};
-var character2 = {name: "Fox", hp: 130, attack: 20, specialattack: 30};
+var character0 = {name: "Monkey", hp: 80, attack: 50, specialattack: 150};
+var character1 = {name: "Bear", hp: 150, attack: 45, specialattack: 60};
+var character2 = {name: "Fox", hp: 130, attack: 20, specialattack: 150};
 var character3 = {name: "Giraffe", hp: 200, attack: 10, specialattack: 70};
 
 const characterChoices = [character0, character1, character2];
@@ -97,7 +97,7 @@ $(document).ready(function() {
 // RESET GAME START ---------------------------------------------------------
 function resetGameStat() {
     playerCharacter = {hp:0, attack:0, specialattack:0};
-    playerEnemy = {hp:0, attack:0, specialattack:0};
+    playerEnemy = characterChoices[randNum];
     playerHP = 0;
     playerAttack = 0;
     enemyHP = 0;
@@ -204,7 +204,6 @@ function getCharacterSelection() {
 function playerStatLoad() {
 
 // Take player's choice, load HP and attack-stats, push to play area
-// playerCharacter = characterChoices[0];
     playerHP = playerCharacter.hp;
     playerHPorig = playerCharacter.hp;
     playerAttack = playerCharacter.attack;
@@ -231,7 +230,7 @@ function enemySelect() {
     }// end while-loop
 
     // Assign enemy, load HP and attack-stats, push to play area
-    playerEnemy = characterChoices[randNum];
+    playerEnemy = firstEnemy = characterChoices[randNum];
     enemyHP = enemyHPorig = playerEnemy.hp;
     enemyAttack = playerEnemy.attack;
     $(document).ready(function() {
@@ -251,7 +250,7 @@ function enemySelect2() {
     randNum = Math.round(Math.random()*(characterChoices.length-1));
 
     // Pick the character that is not player or previous enemy
-    while (characterChoices[randNum] == playerCharacter || characterChoices[randNum] == playerEnemy) {
+    while (characterChoices[randNum] == playerCharacter || characterChoices[randNum] == firstEnemy) {
         randNum = Math.round(Math.random()*(characterChoices.length-1));
     }//end while-loop
 
@@ -341,16 +340,22 @@ $(document).ready(function() {
                 $("#enemyHPratio").css({"width": 0+"%"});
                 hideEnemySprite();
 
-                // If winCount < 2, move on to next level
-                if (winCount < 2) {
-                    nextLevelStart();
-                    showNextLevelBtn();
+                // If winCount > 2, run gameWin()
+                if (winCount > 2) {
+                    setTimeout(gameWin, 2500);
                 }
-                // Else, move on to final level
                 else {
-                    finalLevelStart();
-                    showFinalLevelBtn();
-                }
+                    // If winCount < 2, move on to next level
+                    if (winCount < 2) {
+                        nextLevelStart();
+                        showNextLevelBtn();
+                    }
+                    // Else, move on to final level
+                    else {
+                        finalLevelStart();
+                        showFinalLevelBtn();
+                    }
+                }//end else
             }//end outer else if
 
         }// end action()

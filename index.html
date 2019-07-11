@@ -10,7 +10,7 @@
     <script type="text/javascript" src="./assets/javascript/game.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
-    <title>RPG Game</title>
+    <title>Battle Game</title>
 
 </head>
 <body>
@@ -22,9 +22,13 @@
 <main>
 
 <!-- Start screen -->
-<div class="bg-warning startScreenDiv" id="startScreen">
+<div class="startScreenDiv" id="startScreen">
     <div class="row" id="startRow">
-        <h1 class="text-light bounce" id="startHeader">RPG Game!</h1>
+        <h1 class="text-light bounce" id="startHeader">Battle Game!</h1>
+        <p class="" id="startP">
+            Select your player and battle your way to the final challenge...<br>
+            You get one powerful special attack - use it at the right timing to win!
+        </p>
         <button onclick="gameStart()" class="btn btn-lg btn-dark buttonStyle"><span id="gameStart">Start</span></button>
     </div>
 </div> <!-- end of Jumbotron -->
@@ -37,7 +41,7 @@
             <!-- Character selection area -->
             <div class="col-12 my-auto" id="selectionArea" style="display: none;">
                 <div class="empty"></div>
-                <h1 class="textShimmer" id="selectionScreenHeader">Select Player</h1>
+                <h1 class="" id="selectionScreenHeader">Select Player</h1>
                 <h3 class="text-muted">Your opponents will be picked randomly</h3>
                 
                 <div class="row characterChoices">
@@ -80,7 +84,7 @@
                 <div class="empty"></div>
                 <div class="row playDivisionRow"> <!-- Character wrapper-->
                     <div class="col-5 mx-auto playDivision playDivPlayer">
-                        <h1 class="textShimmer2" id="playerName"></h1>
+                        <h1 class="textShimmer" id="playerName"></h1>
                         <br>
                         <div class="spriteArea cssField">
                             <img class="spriteFormat" id="playerSprite" src="">
@@ -92,7 +96,7 @@
                     <div class="col-1 mx-auto"></div>
 
                     <div class="col-5 mx-auto playDivision playDivEnemy">
-                        <h1 class="textShimmer2" id="enemyName"></h1>
+                        <h1 class="textShimmer" id="enemyName"></h1>
                         <br>
                         <div class="spriteArea cssField">
                             <img class="spriteFormat" id="enemySprite" src="">
